@@ -54,6 +54,7 @@
 (load-user-file "complete.el")
 (load-user-file "tabs.el")
 (load-user-file "treemacs.el")
+(load-user-file "spotify.el")
 
 ;;; Variables
 (global-visual-line-mode)
