@@ -16,3 +16,15 @@
 (use-package impatient-mode
   :straight t
   :defer t)
+
+(use-package page-break-lines
+  :straight t)
+
+(use-package spaceline
+  :straight t)
+(spaceline-emacs-theme)
+
+(use-package kaolin-themes
+  :straight t
+  :config
+  (load-theme 'kaolin-galaxy t))
