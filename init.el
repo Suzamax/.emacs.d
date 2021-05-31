@@ -1,0 +1,305 @@
+;; Bootstrapping
+
+(setq straight-check-for-modifications '(check-on-save))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
+
+;; Definition of requirements
+
+(defconst user-init-dir
+  (cond ((boundp 'user-emacs-directory)
+         user-emacs-directory)
+        ((boundp 'user-init-directory)
+         user-init-directory)
+        (t "~/.emacs.d/")))
+
+
+(defun load-user-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file user-init-dir)))
+
+
+(load-user-file "all-the-icons.el")
+
+
+(use-package diminish
+  :straight t
+  :defer t)
+(require 'bind-key)
+
+(use-package use-package-ensure-system-package
+	     :straight t)
+
+(load-user-file "utils.el")
+(load-user-file "web-mode.el")
+(load-user-file "company.el")
+
+
+
+
+(use-package lsp-mode
+  :straight t
+  :config (setq lsp-diagnostic-package :flymake)
+  :hook
+  ((c++-mode . lsp)
+   (c-mode . lsp)
+   (js-mode . lsp)))
+
+(use-package dumb-jump
+  :straight t
+  :defer t
+  :config
+  (setq dumb-jump-selector 'ivy))
+
+
+(use-package ccls
+  :after lsp-mode
+  :straight t
+  :config (setq ccls-executable "/usr/bin/ccls"))
+
+(defun my-c-mode-common-hook ()
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'access-label '/)
+  (c-set-offset 'inclass '+)
+  (setq c-default-style "bsd"
+	c-basic-offset 4
+	c-indent-level 4
+	c-indent-tabs-mode t
+	c-tab-always-indent t
+	c++-tab-always-indent t
+	tab-width 4
+	backward-delete-function nil))
+
+(add-hook 'c++-mode-common-hook 'my-c-mode-common-hook)
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+(add-to-list 'default-frame-alist '(font . "Cascadia Code 18" ))
+
+
+(use-package docker
+  :straight t
+  :commands docker)
+
+(use-package dockerfile-mode
+  :straight t
+  :mode ("Dockerfile\\'" . dockerfile-mode))
+
+(use-package yaml-mode
+  :straight t
+  :mode ("\\.yml\\'" . yaml-mode))
+
+
+
+(use-package page-break-lines
+  :straight t)
+
+(use-package dashboard
+  :straight t
+  :after (all-the-icons page-break-lines)
+  :config
+  ;; Dashboard configuration.
+  (dashboard-setup-startup-hook)
+  (setq dashboard-banner-logo-title "All Mighty Suzamacs, the best Emacs ever!!!1")
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-items '((recents . 5)
+			  (bookmarks . 5)))
+  (setq dashboard-set-init-info t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+
+
+;;; Global
+;; Ivy is a generic completion tool
+(use-package ivy
+  :straight t
+  :diminish ivy-mode
+  :defer 0.9
+  :config
+  (ivy-mode))
+
+(use-package swiper
+  :straight t
+  :after ivy
+  :bind (("C-s" . swiper)
+	 ("C-M-s" . swiper-thing-at-point)))
+
+(use-package counsel
+  :straight t
+  :after ivy
+  :diminish counsel-mode
+  :config
+  (counsel-mode))
+
+(use-package ivy-avy
+  :straight t
+  :after (ivy avy))
+
+(use-package ivy-prescient
+  :straight t
+  :after counsel
+  :config
+  (ivy-prescient-mode)
+  (setq ivy-initial-inputs-alist ivy-prescient--old-initial-inputs-alist))
+
+(use-package smartparens
+  :straight t
+  :defer 5.1
+  :diminish smartparens-mode
+  :config
+  (smartparens-global-mode))
+
+(use-package highlight-parentheses
+  :straight t
+  :defer 5.3
+  :diminish highlight-parentheses-mode
+  :config (global-highlight-parentheses-mode))
+
+(defvar show-paren-delay 0)
+(show-paren-mode t)
+
+(use-package centaur-tabs
+  :straight t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+(setq centaur-tabs-style "rounded")
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-height 40)
+
+(load-user-file "treemacs.el")
+
+;;; Variables
+(global-visual-line-mode)
+(global-set-key (kbd "TAB") 'self-insert-command)
+(global-set-key (kbd "\C-c h") 'highlight-symbol-at-point)
+(setq visible-bell 1)
+
+;; For versions >= 27, this is done on early-init.el
+(when (< emacs-major-version 27)
+  (menu-bar-mode 1)
+  (tool-bar-mode 1)
+  (scroll-bar-mode -1))
+(global-display-line-numbers-mode 1)
+
+
+(use-package hydra
+  :straight t
+  :defer 2.5)
+
+(load-file (concat user-emacs-directory "other-settings/hydra-modal.el"))
+
+(defhydra hydra-project (:color teal
+				:hint nil)
+  "
+  _f_: find-file  _g_: regexp  _e_: eshell   _G_: interactive regexp
+  _c_: compile    _d_: dired   _r_: replace  _&_: async shell
+  _b_: buffers    _p_: projects            ^^_k_: kill buffer
+  "
+  ("q" nil "quit")
+  ("f" project-find-file)
+  ("g" project-find-regexp)
+  ("b" project-switch-to-buffer)
+  ("k" project-kill-buffers)
+  ("G" project-search)
+  ("r" project-query-replace-regexp)
+  ("d" project-dired)
+  ("e" project-eshell)
+  ("c" project-compile)
+  ("p" project-switch-project)
+  ("&" project-async-shell-command))
+
+(global-set-key (kbd "C-c P") 'hydra-project/body)
+
+(defhydra hydra-ide (:color teal
+			    :hint nil)
+  ("q" nil "quit")
+  ("l" hydra-lsp/body "lsp" :column "IDE features")
+  ("d" hydra-dumb-jump/body "dumb-jump"))
+
+(global-set-key (kbd "C-c i") 'hydra-ide/body)
+
+
+(defhydra hydra-lsp (:exit t :hint nil)
+  "
+ Buffer^^               Server^^                   Symbol
+-------------------------------------------------------------------------------------
+ [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+ [_m_] imenu            [_S_]   shutdown           [_D_] definition   [_t_] type            [_r_] rename
+ [_x_] execute action   [_M-s_] describe session   [_R_] references   [_s_] signature"
+  ("d" lsp-find-declaration)
+  ("D" lsp-ui-peek-find-definitions)
+  ("R" lsp-ui-peek-find-references)
+  ("i" lsp-ui-peek-find-implementation)
+  ("t" lsp-find-type-definition)
+  ("s" lsp-signature-help)
+  ("o" lsp-describe-thing-at-point)
+  ("r" lsp-rename)
+
+  ("f" lsp-format-buffer)
+  ("m" lsp-ui-imenu)
+  ("x" lsp-execute-code-action)
+
+  ("M-s" lsp-describe-session)
+  ("M-r" lsp-restart-workspace)
+  ("S" lsp-shutdown-workspace))
+
+(defhydra hydra-tab (:color teal
+			    :hint nil)
+  "
+  tab-bar commands:
+  _2_: tab-new  _<tab>_: tab-next      _C-<tab>_: tab-previous  _b_: switch-to-buffer-other-tab
+  _u_: tab-undo  _d_: dired-other-tab  _r_: tab-rename         _<RET>_: tab-bar-select-tab-by-name
+  "
+  ("q" nil "quit")
+  ("2" tab-new)
+  ("r" tab-rename)
+  ("b" switch-to-buffer-other-tab)
+  ("f" find-file-other-tab)
+  ("<RET>" tab-bar-select-tab-by-name)
+  ("C-<tab>" tab-previous)
+  ("<tab>" tab-next)
+  ("u" tab-undo)
+  ("d" dired-other-tab))
+
+(use-package spaceline
+  :straight t)
+(spaceline-emacs-theme)
+
+
+(use-package kaolin-themes
+  :straight t
+  :config
+  (load-theme 'kaolin-galaxy t))
+
+
+
+
+;; Bison and Flex
+
+(setq imenu-create-index-function 
+        (lambda ()
+          (let ((end))
+             (beginning-of-buffer)
+             (re-search-forward "^%%")
+             (forward-line 1)
+             (setq end (save-excursion (re-search-forward "^%%") (point)))
+             (loop while (re-search-forward "^\\([a-z].*?\\)\\s-*\n?\\s-*:" end t)
+                   collect (cons (match-string 1) (point))))))
