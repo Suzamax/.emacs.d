@@ -1,6 +1,6 @@
 .cache/
 eclipse.jdt.ls/*
-
+workspace/*
 
 # Ignore Straight (lol it's like node_modules)
 straight/build/

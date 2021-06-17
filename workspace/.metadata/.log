@@ -5424,3 +5424,23 @@ org.eclipse.jface.text.BadLocationException
 
 !ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:55:45.573
 !MESSAGE >> document/codeAction
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:57:49.501
+!MESSAGE >> document/codeAction
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:58:11.031
+!MESSAGE >> document/hover
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:58:11.353
+!MESSAGE >> document/codeAction
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:58:12.375
+!MESSAGE >> document/hover
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2021-06-17 22:58:12.697
+!MESSAGE >> document/codeAction
+
+!ENTRY org.eclipse.core.resources 2 2 2021-06-17 22:58:49.189
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2021-06-17 22:58:49.189
+!MESSAGE The project description file (.project) for 'jdt.ls-java-project' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
