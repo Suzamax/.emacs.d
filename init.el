@@ -46,15 +46,14 @@
 
 (load-user-file "all-the-icons.el")
 (load-user-file "utils.el")
+(load-user-file	"ivy.el")
 (load-user-file "dashboard.el")
 (load-user-file "web-mode.el")
 (load-user-file "company.el")
-(load-user-file "lsp-dev.el")
 (load-user-file "docker.el")
-(load-user-file "complete.el")
 (load-user-file "tabs.el")
-(load-user-file "treemacs.el")
 (load-user-file "spotify.el")
+(load-user-file "java-lsp.el")
 
 ;;; Variables
 (global-visual-line-mode)
@@ -68,5 +67,3 @@
   (tool-bar-mode 1)
   (scroll-bar-mode -1))
 (global-display-line-numbers-mode 1)
-
-(load-user-file "bison-flex.el")

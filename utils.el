@@ -22,9 +22,19 @@
 
 (use-package spaceline
   :straight t)
-(spaceline-emacs-theme)
+(spaceline-spacemacs-theme)
 
-(use-package kaolin-themes
+(use-package spaceline-all-the-icons 
+  :after spaceline
+  :straight t
+  :config (spaceline-all-the-icons-theme))
+
+(setq spaceline-all-the-icons-separator-type 'wave)
+
+(use-package doom-themes
   :straight t
   :config
-  (load-theme 'kaolin-galaxy t))
+  (load-theme 'doom-fairy-floss t))
+;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
