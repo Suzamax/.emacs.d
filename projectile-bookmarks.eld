@@ -1,1 +1,1 @@
-("~/Desarrollo/demo/")
+("~/.emacs.d/" "~/Desarrollo/demo/" "~/Desarrollo/demo/.mvn/" "~/Desarrollo/demo/src/")

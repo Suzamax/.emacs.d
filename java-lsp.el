@@ -13,11 +13,8 @@
 
 (use-package lsp-mode
   :straight t
-  :hook (
-	 (lsp-mode . lsp-enable-which-key-integration)
-	)
-  :config (setq lsp-completion-enable-additional-text-edit nil)
-  )
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :config (setq lsp-completion-enable-additional-text-edit nil))
 
 (use-package hydra :straight t)
 
@@ -30,16 +27,14 @@
 
 (use-package lsp-java
   :straight t
-  :requires (dap-java lsp-java-boot)
-  :config (
+  :requires (dap-java lsp-java-boot))
 	     
 	   (add-hook 'java-mode-hook #'lsp)
 
 	   ;; to enable the lenses
 	   (add-hook 'lsp-mode-hook #'lsp-lens-mode)
 	   (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-	   )
-  )
+	  
 
 (use-package dap-mode
   :straight t
@@ -58,3 +53,7 @@
 
 (use-package lsp-treemacs
   :straight t)
+
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+;; (setq lsp-enable-links nil)
