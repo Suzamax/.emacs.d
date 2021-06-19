@@ -30,6 +30,8 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+(setq debug-on-error t)
+
 (load-user-file "all-the-icons.el")
 (load-user-file "utils.el")
 (load-user-file	"ivy.el")
