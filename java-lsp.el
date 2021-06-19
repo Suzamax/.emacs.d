@@ -28,7 +28,9 @@
 (use-package lsp-java
   :straight t
   :requires (dap-java lsp-java-boot))
-	     
+
+(with-eval-after-load 'lsp-java
+  (lsp-java-lombok))
 	   (add-hook 'java-mode-hook #'lsp)
 
 	   ;; to enable the lenses

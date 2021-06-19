@@ -1,6 +1,6 @@
 .cache/
 eclipse.jdt.ls/*
-workspace/*
+workspace/
 .DS_Store
 
 # Ignore Straight (lol it's like node_modules)
@@ -23,7 +23,13 @@ elpa/
 recentf
 .lsp-session-v1
 auto-save-list/
-all-the-icons-dired/
+elpa/
+eshell/
+request/
+snippets/
+transient/
+projectile.cache
+projectile-bookmarks.eld
 *~
-.gitignore~
+OLDinit.el
 session.*

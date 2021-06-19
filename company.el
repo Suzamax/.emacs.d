@@ -1,5 +1,4 @@
 (use-package company
-  :straight t
   :commands company-mode
   :bind (:map company-active-map
 	      ("C-n" . 'company-select-next)
@@ -39,11 +38,11 @@ In that case, insert the number."
 	(company-complete-number (string-to-number k))))))
 
 (use-package company-quickhelp
-  :straight t
   :hook (company-mode . company-quickhelp-local-mode))
 
 (use-package company-prescient
-  :straight t
   :after company
   :config
   (company-prescient-mode))
+
+(add-hook 'after-init-hook 'global-company-mode)

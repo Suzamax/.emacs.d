@@ -1,25 +1,3 @@
-;; Bootstrapping
-
-(setq straight-check-for-modifications '(check-on-save))
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
-
-;; Font definition - I use MS Cascadia :-)
-
-(add-to-list 'default-frame-alist '(font . "Cascadia Code 18" ))
-
 ;; Definition of requirements
 
 (defconst user-init-dir
@@ -35,14 +13,22 @@
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
+(condition-case nil
+    (require 'use-package)
+  (file-error
+   (require 'package)
+   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+   (package-initialize)
+   (package-refresh-contents)
+   (package-install 'use-package)
+   (setq use-package-always-ensure t)
+   (require 'use-package)))
 
-(use-package use-package-ensure-system-package
-  :straight t)
+(add-to-list 'default-frame-alist '(font . "Cascadia Code 18" ))
 
-(use-package diminish
-  :straight t
-  :defer t)
-(require 'bind-key)
+(use-package exec-path-from-shell)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (load-user-file "all-the-icons.el")
 (load-user-file "utils.el")
@@ -53,17 +39,21 @@
 (load-user-file "docker.el")
 (load-user-file "tabs.el")
 (load-user-file "spotify.el")
-(load-user-file "java-lsp.el")
+(load-user-file "treemacs.el")
+(load-user-file "projectile.el")
+(load-user-file "ide.el")
+(load-user-file "lsp-java-lombok.el")
 
-;;; Variables
-(global-visual-line-mode)
-(global-set-key (kbd "TAB") 'self-insert-command)
-(global-set-key (kbd "\C-c h") 'highlight-symbol-at-point)
-(setq visible-bell 1)
-
-;; For versions >= 27, this is done on early-init.el
-(when (< emacs-major-version 27)
-  (menu-bar-mode 1)
-  (tool-bar-mode 1)
-  (scroll-bar-mode -1))
-(global-display-line-numbers-mode 1)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(helm-spotify-plus centaur-tabs yaml-mode dockerfile-mode docker company-prescient company-quickhelp tide js2-mode web-mode dashboard counsel doom-themes spaceline-all-the-icons spaceline page-break-lines impatient-mode rainbow-mode emmet-mode magit all-the-icons-dired all-the-icons yasnippet which-key use-package projectile lsp-ui lsp-java helm-lsp flycheck company)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
