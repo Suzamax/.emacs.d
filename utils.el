@@ -26,7 +26,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t))
+  (load-theme 'doom-fairy-floss t))
 ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -41,3 +41,12 @@
 
 (use-package ns-auto-titlebar)
 (when (eq system-type 'darwin) (ns-auto-titlebar-mode))
+
+(use-package hl-todo)
+
+(setq hl-todo-keyword-faces
+      '(("TODO"   . "#00FF00")
+        ("FIXME"  . "#FF0000")
+        ("DEBUG"  . "#A020F0")
+        ("GOTCHA" . "#FF4500")
+        ("STUB"   . "#1E90FF")))

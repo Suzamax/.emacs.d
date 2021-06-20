@@ -40,3 +40,22 @@
 (defun linum-java-mode-hook () 
   (linum-mode 1)) 
 (add-hook 'java-mode-hook 'linum-java-mode-hook) 
+(add-hook 'java-mode-hook 'hl-todo-mode)
+
+(setq
+ lsp-java-format-enabled t
+ lsp-java-format-comments-enabled t
+ lsp-java-save-action-organize-imports t
+ lsp-java-save-action-organize-imports t
+ lsp-java-import-gradle-enabled t
+ lsp-java-import-maven-enabled t
+ lsp-java-auto-build t
+ lsp-print-io t
+ lsp-java-progress-report t
+ lsp-java-completion-guess-arguments t
+ lsp-java-enable-file-watch t)
+
+  ;;    ;; Debug Server
+  ;;    lsp-java-trace-server t
+  ;;    lsp-java-progress-report t
+  ;;    )
