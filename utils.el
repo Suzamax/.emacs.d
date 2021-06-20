@@ -16,7 +16,7 @@
 (use-package page-break-lines)
 
 (use-package spaceline)
-(spaceline-spacemacs-theme)
+;;(spaceline-spacemacs-theme)
 
 (use-package spaceline-all-the-icons 
   :after spaceline
@@ -26,7 +26,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-acario-dark t))
+  (load-theme 'doom-one t))
 ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled

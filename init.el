@@ -24,7 +24,7 @@
    (setq use-package-always-ensure t)
    (require 'use-package)))
 
-(add-to-list 'default-frame-alist '(font . "Cascadia Code 18" ))
+(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 14" ))
 
 (use-package exec-path-from-shell)
 (when (memq window-system '(mac ns x))
@@ -51,6 +51,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" default))
  '(package-selected-packages
    '(helm-spotify-plus centaur-tabs yaml-mode dockerfile-mode docker company-prescient company-quickhelp tide js2-mode web-mode dashboard counsel doom-themes spaceline-all-the-icons spaceline page-break-lines impatient-mode rainbow-mode emmet-mode magit all-the-icons-dired all-the-icons yasnippet which-key use-package projectile lsp-ui lsp-java helm-lsp flycheck company)))
 (custom-set-faces
