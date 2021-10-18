@@ -1,9 +1,8 @@
 (use-package dashboard
-  :after (all-the-icons page-break-lines)
+  :ensure t
   :config
   ;; Dashboard configuration.
   (dashboard-setup-startup-hook)
-  (setq dashboard-banner-logo-title "All Mighty Suzamacs, the best Emacs ever!!!1")
   (setq dashboard-startup-banner "~/.emacs.d/siamese.png")
   (setq dashboard-items '((recents . 5)
 			  (projects . 5)

@@ -5,7 +5,9 @@
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward))
-(setq centaur-tabs-style "bar")
-(setq centaur-tabs-set-icons t)
-(setq centaur-tabs-height 35)
-(setq centaur-tabs-set-bar 'under)
+  (centaur-tabs-headline-match)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-height 32)
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-set-bar 'left)
+  (setq centaur-tabs-set-modified-marker t)

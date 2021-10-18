@@ -1,5 +1,3 @@
-;; Definition of requirements
-
 (defconst user-init-dir
   (cond ((boundp 'user-emacs-directory)
          user-emacs-directory)
@@ -13,51 +11,108 @@
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
-(condition-case nil
-    (require 'use-package)
-  (file-error
-   (require 'package)
-   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-   (package-initialize)
-   (package-refresh-contents)
-   (package-install 'use-package)
-   (setq use-package-always-ensure t)
-   (require 'use-package)))
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("org" . "http://orgmode.org/elpa/") t)
 
-(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 14" ))
+(package-initialize)
 
-(use-package exec-path-from-shell)
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+(when (not package-archive-contents)
+    (package-refresh-contents))
 
-;; (setq debug-on-error t)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
-(load-user-file "all-the-icons.el")
-(load-user-file "utils.el")
-(load-user-file	"ivy.el")
+(setq use-package-always-ensure t)
+
+(if (not (package-installed-p 'use-package))
+    (progn
+      (package-refresh-contents)
+      (package-install 'use-package)))
+
+(require 'use-package)
+
+;; Dashboard
 (load-user-file "dashboard.el")
-(load-user-file "web-mode.el")
-(load-user-file "company.el")
-(load-user-file "docker.el")
-(load-user-file "tabs.el")
-(load-user-file "spotify.el")
+;; All the icons
+(load-user-file "all-the-icons.el")
+;; Treemacs
 (load-user-file "treemacs.el")
+;; Projectile
 (load-user-file "projectile.el")
-(load-user-file "ide.el")
+;; Tabs
+(load-user-file "tabs.el")
+;; Ace Window
+(load-user-file "ace.el")
+;; Company mode
+(load-user-file "company.el")
+;; LSP
+(load-user-file "lsp-mode.el")
+;; Java
+(load-user-file "java-lsp.el")
 (load-user-file "lsp-java-lombok.el")
+;; Web
+(load-user-file "web-mode.el")
+;; Utils
+(load-user-file "utils.el")
+;; Vertico
+(load-user-file "vertico.el")
+;; Spotify
+(load-user-file "spotify.el")
+;; Docker
+(load-user-file "docker.el")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" default))
- '(package-selected-packages
-   '(helm-spotify-plus centaur-tabs yaml-mode dockerfile-mode docker company-prescient company-quickhelp tide js2-mode web-mode dashboard counsel doom-themes spaceline-all-the-icons spaceline page-break-lines impatient-mode rainbow-mode emmet-mode magit all-the-icons-dired all-the-icons yasnippet which-key use-package projectile lsp-ui lsp-java helm-lsp flycheck company)))
+;; Hooks
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'org-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c-mode-hook 'yas-minor-mode)
+(add-hook 'c++-mode-hook 'lsp)
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
+
+;; Modes
+
+(which-key-mode)
+(electric-pair-mode 1)
+(doom-modeline-mode 1)
+(treemacs-resize-icons 16)
+(hl-line-mode 1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(company-mode 1)
+(yas-minor-mode 1)
+(toggle-truncate-lines 1)
+
+;; Astyle
+(load-user-file "astyle.el")
+;; Tramp sudo
+(load-user-file "tramp.el")
+;; PlantUML
+(load-user-file "plantuml.el")
+
+(require 'ox-extra)
+(ox-extras-activate '(latex-header-blocks ignore-headlines))
+
+
+(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 16" ))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-comment-face ((t (:font "Helvetica" :size 16)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired)))

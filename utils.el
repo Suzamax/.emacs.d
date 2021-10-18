@@ -15,32 +15,19 @@
 
 (use-package page-break-lines)
 
-(use-package spaceline)
-;;(spaceline-spacemacs-theme)
-
-(use-package spaceline-all-the-icons 
-  :after spaceline
-  :config (spaceline-all-the-icons-theme))
-
-(setq spaceline-all-the-icons-separator-type 'slant)
-
 (use-package doom-themes
   :config
   (load-theme 'doom-fairy-floss t))
 ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
+;; macOS
 (when (eq system-type 'darwin)
-  (setq mac-right-option-modifier 'none))
-
-(setq linum-format "%4d \u2502 ")
-
-(setq-default display-line-numbers-width 3)
-(tool-bar-mode -1)
-
-(use-package ns-auto-titlebar)
-(when (eq system-type 'darwin) (ns-auto-titlebar-mode))
+  (use-package ns-auto-titlebar)
+  (ns-auto-titlebar-mode)
+  (setq mac-right-option-modifier 'none)
+  (menu-bar-mode 1)
+    (setq default-input-method "MacOSX"))
 
 (use-package hl-todo)
 
@@ -50,3 +37,10 @@
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
         ("STUB"   . "#1E90FF")))
+
+;; Packages
+(use-package highlight-symbol)
+(use-package color-identifiers-mode)
+(use-package highlight-indent-guides)
+(use-package function-args)
+(use-package doom-modeline)
