@@ -19,6 +19,9 @@
 
 (package-initialize)
 
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (when (not package-archive-contents)
     (package-refresh-contents))
 
@@ -63,11 +66,13 @@
 (load-user-file "spotify.el")
 ;; Docker
 (load-user-file "docker.el")
-
+;; Org-bars
+(load-user-file "org-bars.el")
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'org-mode-hook 'display-line-numbers-mode)
+(add-hook 'org-mode-hook #'org-bars-mode)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -85,8 +90,8 @@
 (doom-modeline-mode 1)
 (treemacs-resize-icons 16)
 (hl-line-mode 1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(menu-bar-mode 1)
+(tool-bar-mode 1)
 (company-mode 1)
 (yas-minor-mode 1)
 (toggle-truncate-lines 1)
@@ -108,11 +113,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-comment-face ((t (:font "Helvetica" :size 16)))))
+ '(font-lock-comment-face ((t (:foreground "#5B6268" :slant normal :weight normal :height 150 :width normal :foundry "nil" :family "Helvetica")))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired)))
+   '(exec-path-from-shell org-sidebar vs-dark-theme vscode-icon dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired)))

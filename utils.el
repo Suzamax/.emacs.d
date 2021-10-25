@@ -15,12 +15,21 @@
 
 (use-package page-break-lines)
 
-(use-package doom-themes
+(use-package vscode-icon
+  :ensure t
+  :commands (vscode-icon-for-file))
+
+(use-package vscode-dark-plus-theme
+  :ensure t
   :config
-  (load-theme 'doom-fairy-floss t))
+  (load-theme 'vscode-dark-plus t))
+
+;;(use-package doom-themes
+;;  :config
+;;  (load-theme 'doom-one t))
 ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
 ;; macOS
 (when (eq system-type 'darwin)
   (use-package ns-auto-titlebar)
