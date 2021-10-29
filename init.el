@@ -60,6 +60,10 @@
 (load-user-file "web-mode.el")
 ;; Utils
 (load-user-file "utils.el")
+;; Ligatures
+(load-user-file "ligatures.el")
+;; Toolbar
+(load-user-file "tool-bar.el")
 ;; Vertico
 (load-user-file "vertico.el")
 ;; Spotify
@@ -68,6 +72,8 @@
 (load-user-file "docker.el")
 ;; Org-bars
 (load-user-file "org-bars.el")
+;; Elixir
+(load-user-file "elixir.el")
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -82,6 +88,10 @@
 (add-hook 'c-mode-hook 'yas-minor-mode)
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
+(add-hook 'prog-mode-hook 'auto-composition-mode)
+(add-hook 'prog-mode-hook #'rainbow-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 
 ;; Modes
 
@@ -95,6 +105,8 @@
 (company-mode 1)
 (yas-minor-mode 1)
 (toggle-truncate-lines 1)
+(global-auto-composition-mode -1)
+(centaur-tabs-mode -1) ;; Disabled by default
 
 ;; Astyle
 (load-user-file "astyle.el")
@@ -107,13 +119,7 @@
 (ox-extras-activate '(latex-header-blocks ignore-headlines))
 
 
-(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 16" ))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-comment-face ((t (:foreground "#5B6268" :slant normal :weight normal :height 150 :width normal :foundry "nil" :family "Helvetica")))))
+(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 14" ))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -121,3 +127,9 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(exec-path-from-shell org-sidebar vs-dark-theme vscode-icon dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
