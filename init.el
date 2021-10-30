@@ -89,6 +89,8 @@
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 (add-hook 'prog-mode-hook 'auto-composition-mode)
+;; Ligatures fuck up C-mode...
+(add-hook 'c-mode-hook 'auto-composition-mode -1)
 (add-hook 'prog-mode-hook #'rainbow-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
