@@ -37,8 +37,11 @@
 
 (require 'use-package)
 
+;; TODO Needs organization
 ;; Dashboard
 (load-user-file "dashboard.el")
+;; Toolbar
+(load-user-file "tool-bar.el")
 ;; All the icons
 (load-user-file "all-the-icons.el")
 ;; Treemacs
@@ -62,14 +65,14 @@
 (load-user-file "utils.el")
 ;; Ligatures
 (load-user-file "ligatures.el")
-;; Toolbar
-(load-user-file "tool-bar.el")
 ;; Vertico
 (load-user-file "vertico.el")
 ;; Spotify
 (load-user-file "spotify.el")
 ;; Docker
 (load-user-file "docker.el")
+;; Kubernetes
+(load-user-file "kubernetes.el")
 ;; Org-bars
 (load-user-file "org-bars.el")
 ;; Elixir
@@ -108,7 +111,7 @@
 (yas-minor-mode 1)
 (toggle-truncate-lines 1)
 (global-auto-composition-mode -1)
-(centaur-tabs-mode -1) ;; Disabled by default
+(centaur-tabs-mode 1)
 
 ;; Astyle
 (load-user-file "astyle.el")
@@ -120,15 +123,15 @@
 (require 'ox-extra)
 (ox-extras-activate '(latex-header-blocks ignore-headlines))
 
-
-(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 14" ))
+(add-to-list 'default-frame-alist '(font . "Cascadia Code PL 15" ))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(exec-path-from-shell org-sidebar vs-dark-theme vscode-icon dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired)))
+   '(olivetti exec-path-from-shell org-sidebar vs-dark-theme vscode-icon dap-java yasnippet which-key vertico use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil smex plantuml-mode org-plus-contrib orderless ns-auto-titlebar lsp-ui lsp-java js2-mode highlight-symbol highlight-indent-guides function-args flycheck doom-themes doom-modeline dashboard company-quickhelp company-prescient color-identifiers-mode centaur-tabs all-the-icons-dired))
+ '(warning-suppress-log-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

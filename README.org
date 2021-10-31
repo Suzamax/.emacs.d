@@ -4,7 +4,7 @@ I was an avid user of VSCode, then I made the switch to Emacs just out of curios
 
 While Spacemacs was too slow, I thought it was great, then I discovered Doom Emacs, and wow, just wow.
 
-Now I'm on my own designing a small yet capable Emacs that suits my needs.
+Now I'm on my own designing a small yet capable Emacs that suits my needs. It's still in development.
 
 Enjoy.
 
@@ -20,6 +20,3 @@ But they aren't globally enabled since there's a problem with Emacs prior to v28
 [[./images/ligatures.png]]
 ** While programming in C...
 [[./images/c.png]]
-** Fancy candy
-It has rainbow-mode and a Pokémon, I have a Latios
-[[./images/fancy.png]]

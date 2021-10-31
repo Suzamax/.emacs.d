@@ -21,17 +21,22 @@
   :ensure t
   :commands (vscode-icon-for-file))
 
+(use-package chocolate-theme
+  :ensure t
+  :config
+  (load-theme 'chocolate t))
+
 ;;(use-package vscode-dark-plus-theme
 ;;  :ensure t
 ;;  :config
 ;;  (load-theme 'vscode-dark-plus t))
 
-(use-package doom-themes
-  :config
-  (load-theme 'doom-opera t))
+;;(use-package doom-themes
+;;  :config
+;;  (load-theme 'doom-opera t))
   ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
 ;; macOS
 (when (eq system-type 'darwin)
   (use-package ns-auto-titlebar)
@@ -57,11 +62,4 @@
 (use-package doom-modeline)
 (use-package smartparens)
 (require 'smartparens-config)
-
-
-;; Fancy shit
-
-(use-package poke-line
-  :ensure t)
-(poke-line-global-mode 1)
-(poke-line-set-pokemon "latios")
+(use-package olivetti)
