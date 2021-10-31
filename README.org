@@ -20,3 +20,17 @@ But they aren't globally enabled since there's a problem with Emacs prior to v28
 [[./images/ligatures.png]]
 ** While programming in C...
 [[./images/c.png]]
+* FAQ
+
+** I want to use my own theme!
+Yeah, simply edit ~utils.el~. I have already add some configurations for some themes, although they are commented.
+** Add X thing please!
+This package is mine, but it's okay to fork it, to add new features and so on. If I have something that could be fixed or improved, feel free to hit me up and we'll see (issues, PRs, Telegram...).
+** You suck at elisp!
+lol
+** I don't like cats!
+🖕
+** I like this, could I donate you?
+I don't do this for the money, it's my Swiss Knife for my work and studies, but I like to make it freely available.
+** Could you replace X with Y...? I see it's better!
+Like I said above, but tell me why.
