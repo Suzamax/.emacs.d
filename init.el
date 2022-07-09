@@ -16,10 +16,13 @@
              '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("org-plus-contrib" . "https://orgmode.org/elpa/") t)
+
 
 (package-initialize)
 
 (when (memq window-system '(mac ns x))
+  (package-install 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
 (when (not package-archive-contents)
@@ -56,9 +59,6 @@
 (load-user-file "company.el")
 ;; LSP
 (load-user-file "lsp-mode.el")
-;; Java
-(load-user-file "java-lsp.el")
-(load-user-file "lsp-java-lombok.el")
 ;; Web
 (load-user-file "web-mode.el")
 ;; Utils
@@ -75,8 +75,6 @@
 (load-user-file "kubernetes.el")
 ;; Org-bars
 (load-user-file "org-bars.el")
-;; Elixir
-(load-user-file "elixir.el")
 ;; Hooks
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -117,8 +115,6 @@
 (load-user-file "astyle.el")
 ;; Tramp sudo
 (load-user-file "tramp.el")
-;; PlantUML
-(load-user-file "plantuml.el")
 
 (require 'ox-extra)
 (ox-extras-activate '(latex-header-blocks ignore-headlines))

@@ -29,11 +29,11 @@
 
 ;;; Code:
 
-(require 'color)
-(require 'face-remap)
-(require 's)
-(require 'dash)
-(require 'org-indent)
+(use-package color)
+(use-package face-remap)
+(use-package s)
+(use-package dash)
+(use-package org-plus-contrib)
 
 ;;; compute XPM image data (virtual bars)
 
