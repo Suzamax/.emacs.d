@@ -1,0 +1,10 @@
+auto-save-list
+configuration.el
+eln-cache/
+elpa
+history
+*~
+straight/
+*.eld
+.DS_Store
+.cache/
